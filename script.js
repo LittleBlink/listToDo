@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addTask(task){
         const li = document.createElement('li');
-        li.textContent = '';
+        li.textContent = task;
 
         const removeButton = document.createElement('button');
         removeButton.textContent = "Remover";
-        removeButton.addEventListener('click', removeTask());
+        removeButton.addEventListener('click', removeTask);
 
         li.appendChild(removeButton);
         taskList.appendChild(li);
@@ -28,19 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function removeTask(e){
         e.target.parentElement.remove();
-        taskSave();
+        saveTask();
     }
 
     function saveTask(){
         const tasks = [];
         taskList.querySelectorAll('li').forEach(element => {
-            element.push(task.textContent.replace('remover', '').trim());
-            localStorage.setItem('Task', JSON.stringify(tasks));
+            const taskText = element.childNodes[0].nodeValue.trim();
+            tasks.push(taskText);
         });
+        localStorage.setItem('task', JSON.stringify(tasks));
     }
 
     function loadTask(){
-        const tasks = JSON.parse(localStorage.getItem('Task')) || [];
+        const tasks = JSON.parse(localStorage.getItem('task')) || [];
         tasks.forEach(element => addTask(element));
     }
 
