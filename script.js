@@ -10,3 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function addTask(task){
+    const li = document.createElement('li');
+    li.textContent = '';
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = "Remover";
+    removeButton.addEventListener('click', removeTask());
+
+    li.appendChild(removeButton);
+    taskList.appendChild(li);
+
+    saveTask();
+}
+
