@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
+    loadTask()
+
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         addTask(taskInput.value);
@@ -35,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
             element.push(task.textContent.replace('remover', '').trim());
             localStorage.setItem('Task', JSON.stringify(tasks));
         });
+    }
+
+    function loadTask(){
+        const tasks = JSON.parse(localStorage.getItem('Task')) || [];
+        tasks.forEach(element => addTask(element));
     }
 
 });
