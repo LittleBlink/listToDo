@@ -24,3 +24,7 @@ function addTask(task){
     saveTask();
 }
 
+function removeButton(e){
+    e.target.parentElement.remove();
+    taskSave();
+}
