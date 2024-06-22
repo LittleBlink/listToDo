@@ -3,5 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    
+    taskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        addTask(taskInput.value);
+        taskInput.textContent = '';
+    });
 });
+
