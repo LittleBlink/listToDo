@@ -8,23 +8,33 @@ document.addEventListener('DOMContentLoaded', () => {
         addTask(taskInput.value);
         taskInput.textContent = '';
     });
+
+
+    function addTask(task){
+        const li = document.createElement('li');
+        li.textContent = '';
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = "Remover";
+        removeButton.addEventListener('click', removeTask());
+
+        li.appendChild(removeButton);
+        taskList.appendChild(li);
+
+        saveTask();
+    }
+
+    function removeTask(e){
+        e.target.parentElement.remove();
+        taskSave();
+    }
+
+    function saveTask(){
+        const tasks = [];
+        taskList.querySelectorAll('li').forEach(element => {
+            element.push(task.textContent.replace('remover', '').trim());
+            localStorage.setItem('Task', JSON.stringify(tasks));
+        });
+    }
+
 });
-
-function addTask(task){
-    const li = document.createElement('li');
-    li.textContent = '';
-
-    const removeButton = document.createElement('button');
-    removeButton.textContent = "Remover";
-    removeButton.addEventListener('click', removeTask());
-
-    li.appendChild(removeButton);
-    taskList.appendChild(li);
-
-    saveTask();
-}
-
-function removeButton(e){
-    e.target.parentElement.remove();
-    taskSave();
-}
